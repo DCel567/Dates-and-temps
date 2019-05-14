@@ -1,21 +1,30 @@
-// Dates_and_temps.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include "pch.h"
-#include <iostream>
+#include "data.h"
+#include <fstream>
+using namespace std;
 
-int main()
-{
-    std::cout << "Hello World!\n"; 
+int main() {
+	cout << "Input ifile name.\n";
+	string iname;
+	cin >> iname;
+	ifstream ifs{ iname };
+	if (!ifs) cout << "Can't open ifile " << iname << endl;
+
+	ifs.exceptions(ifs.exceptions() | ios_base::badbit);
+
+	cout << "Input ofile name.\n";
+	string oname;
+	cin >> oname;
+	ofstream ofs{ oname };
+	if (!ofs) cout << "Can't open ofile " << oname << endl;
+
+	vector<Year> ys;
+	while (true) {
+		Year y;
+		if (!(ifs >> y)) break;
+		ys.push_back(y);
+	}
+	cout << "Read " << ys.size() << " year notes.\n";
+
+	//for (Year& y : ys) print_year(ofs, y);
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
