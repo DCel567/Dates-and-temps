@@ -23,7 +23,7 @@ struct Month {
 
 struct Year {
 	int year;
-	std::vector<Month> months{ 11 };
+	std::vector<Month> months{ 12 };
 };
 
 void end_of_loop(std::istream& ist, char term, const std::string& message);
@@ -37,3 +37,5 @@ std::istream& operator>>(std::istream& is, Reading& r);
 std::istream& operator>>(std::istream& is, Month& m);
 
 std::istream& operator>>(std::istream& is, Year& y);
+
+void print_year(std::ostream& os, Year& y);

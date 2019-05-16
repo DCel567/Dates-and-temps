@@ -7,7 +7,7 @@ int main() {
 	cout << "Input ifile name.\n";
 	string iname;
 	cin >> iname;
-	ifstream ifs{ iname };
+	ifstream ifs{iname + ".txt"};
 	if (!ifs) cout << "Can't open ifile " << iname << endl;
 
 	ifs.exceptions(ifs.exceptions() | ios_base::badbit);
@@ -15,16 +15,16 @@ int main() {
 	cout << "Input ofile name.\n";
 	string oname;
 	cin >> oname;
-	ofstream ofs{ oname };
+	ofstream ofs{ oname + ".txt" };
 	if (!ofs) cout << "Can't open ofile " << oname << endl;
 
 	vector<Year> ys;
-	while (true) {
+	while (1) {
 		Year y;
 		if (!(ifs >> y)) break;
 		ys.push_back(y);
 	}
 	cout << "Read " << ys.size() << " year notes.\n";
 
-	//for (Year& y : ys) print_year(ofs, y);
+	for (Year& y : ys) print_year(ofs, y);
 }

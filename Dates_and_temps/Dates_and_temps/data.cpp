@@ -9,7 +9,7 @@ std::vector<std::string> month_input_tbl = {
 std::vector<std::string> month_print_tbl = {
 	"January", "February", "March", "April",
 	"May", "June", "July", "August", "September",
-	"November", "December"
+	"October", "November", "December"
 };
 
 void end_of_loop(std::istream& ist, char term, const std::string& message) {
@@ -123,4 +123,24 @@ std::istream& operator>>(std::istream& is, Year& y) {
 
 	end_of_loop(is, '}', "Wrong end of Year");
 	return is;
+}
+
+std::string int_to_month(int m) {
+	return month_print_tbl[m];
+}
+
+void print_year(std::ostream& os, Year& y) {
+	int activeMonths = 0;
+
+	for (int i = 0; i < y.months.size(); i++) if (y.months[i].month != -1) activeMonths++;
+	os << "{ year " << y.year << " ";
+	if (activeMonths >= 1) {
+		for (int i = 0; i < 12; i++) {
+			auto *currMonth = &y.months[i];
+			if (currMonth->month != -1)
+			os << '\n' << '\t' << "{ month " << int_to_month(currMonth->month) << " }";
+		}
+		os << '\n' << "}" << std::endl;
+	}
+	else os << "}" << std::endl;
 }
