@@ -132,13 +132,23 @@ std::string int_to_month(int m) {
 void print_year(std::ostream& os, Year& y) {
 	int activeMonths = 0;
 
-	for (int i = 0; i < y.months.size(); i++) if (y.months[i].month != -1) activeMonths++;
+	for (int i = 0; i < y.months.size(); i++) if (y.months[i].month != not_a_month) activeMonths++;
 	os << "{ year " << y.year << " ";
 	if (activeMonths >= 1) {
 		for (int i = 0; i < 12; i++) {
 			auto *currMonth = &y.months[i];
 			if (currMonth->month != -1)
-			os << '\n' << '\t' << "{ month " << int_to_month(currMonth->month) << " }";
+			os << '\n' << '\t' << "{ month " << int_to_month(currMonth->month) << " ";
+
+			for (int cDay = 0; cDay < 32; cDay++) {
+				for (int cHour = 0; cHour < 24; cHour++) {
+					if (currMonth->day[cDay].hour[cHour] != not_a_reading) {
+						os << "( " << cDay << " " << cHour << " " << currMonth->day[cDay].hour[cHour] << " )";
+					}	
+				}
+			}
+			if (currMonth->month != -1)
+			os << "}\n";
 		}
 		os << '\n' << "}" << std::endl;
 	}
