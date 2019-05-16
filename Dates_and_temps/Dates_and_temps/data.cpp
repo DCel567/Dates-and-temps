@@ -147,12 +147,12 @@ void print_year(std::ostream& os, Year& y) {
 			for (int cDay = 0; cDay < 32; cDay++) {
 				for (int cHour = 0; cHour < 24; cHour++) {
 					if (currMonth->day[cDay].hour[cHour] != not_a_reading) {
-						os << "( " << cDay << " " << cHour << " " << currMonth->day[cDay].hour[cHour] << " )";
+						os << "(" << cDay << " " << cHour << " " << currMonth->day[cDay].hour[cHour] << ")";
 					}	
 				}
 			}
 			if (currMonth->month != -1)
-			os << "}\n";
+			os << "}";
 		}
 		os << '\n' << "}" << std::endl;
 	}
