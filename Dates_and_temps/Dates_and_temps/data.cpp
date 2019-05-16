@@ -13,15 +13,17 @@ std::vector<std::string> month_print_tbl = {
 };
 
 void end_of_loop(std::istream& ist, char term, const std::string& message) {
+	//this checks if year and month input ends with term ("}" in that code)
 	if (ist.fail()) {
 		ist.clear();
 		char ch;
-		if (ist >> ch && ch == term) return; //всё хорошо
+		if (ist >> ch && ch == term) return; //everything is good
 		std::cout << message << std::endl;
 	}
 }
 
 int month_to_int(std::string s) {
+	//converting month to int
 	for (int i = 0; i < 12; i++) if (month_input_tbl[i] == s) return i;
 	return -1;
 }
@@ -30,7 +32,7 @@ constexpr int implausible_min = -200;
 constexpr int implausible_max = 200;
 
 bool is_valid(const Reading& r) {
-	//Грубая проверка
+	//first data input check
 	if (r.day < 1 || 31 < r.day) return false;
 	if (r.hour < 0 || 23 < r.hour) return false;
 	if (r.temperature < implausible_min ||
@@ -126,10 +128,12 @@ std::istream& operator>>(std::istream& is, Year& y) {
 }
 
 std::string int_to_month(int m) {
+	//converting (wow) int to month
 	return month_print_tbl[m];
 }
 
 void print_year(std::ostream& os, Year& y) {
+	//all printing work
 	int activeMonths = 0;
 
 	for (int i = 0; i < y.months.size(); i++) if (y.months[i].month != not_a_month) activeMonths++;
