@@ -17,6 +17,7 @@ int main() {
 	cin >> iname;
 	ifstream ifs{iname + ".txt"};
 	if (!ifs) cout << "Can't open ifile " << iname << endl;
+	//commiting from new visual studio
 
 	ifs.exceptions(ifs.exceptions() | ios_base::badbit);
 
